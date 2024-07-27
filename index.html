@@ -79,15 +79,15 @@
 
     switch (pin) {
       case "1234":
-        document.getElementById("result2").innerHTML = "Your bank balance is Rs. " + d_bal + back_btn;
+        document.getElementById("result2").innerHTML = "Your bank balance is Rs. " + d_bal + "</br> </br>" + back_btn;
         break;
 
       case "1224":
-        document.getElementById("result2").innerHTML = "Your bank balance is Rs. " + dh_bal + back_btn;
+        document.getElementById("result2").innerHTML = "Your bank balance is Rs. " + dh_bal + "</br> </br>" + back_btn;
         break;
 
       case "1524":
-        document.getElementById("result2").innerHTML = "Your bank balance is Rs. " + mh_bal + back_btn;
+        document.getElementById("result2").innerHTML = "Your bank balance is Rs. " + mh_bal + "</br> </br>" + back_btn;
         break;
     }
   }
@@ -115,20 +115,63 @@
   function depositCal() {
     const depositInput = parseInt(document.getElementById("depositInput").value);
 
+    if (depositInput > 0) {
+      switch (pin) {
+        case "1234":
+          d_bal += depositInput;
+          break;
+
+        case "1224":
+          dh_bal += depositInput;
+          break;
+
+        case "1524":
+          mh_bal += depositInput;
+          break;
+      }
+    }
+    Back_btn();
+  }
+
+  function Withdraw() {
+    document.getElementById("result2").innerHTML = "";
+    document.getElementById("options").style.display = "none";
+    document.getElementById("user_page").style.display = "block";
+
     switch (pin) {
       case "1234":
-        d_bal += depositInput;
+        document.getElementById("result2").innerHTML = "Your bank balance is Rs. " + d_bal + withdrawDiv + back_btn;
         break;
 
       case "1224":
-        dh_bal += depositInput;
+        document.getElementById("result2").innerHTML = "Your bank balance is Rs. " + dh_bal + withdrawDiv + back_btn;
         break;
 
       case "1524":
-        mh_bal += depositInput;
+        document.getElementById("result2").innerHTML = "Your bank balance is Rs. " + mh_bal + withdrawDiv + back_btn;
         break;
     }
-    Back_btn()
+  }
+
+  function withdrawCal() {
+    const depositInput = parseInt(document.getElementById("depositInput").value);
+
+    if (depositInput > 0) {
+      switch (pin) {
+        case "1234":
+          d_bal -= depositInput;
+          break;
+
+        case "1224":
+          dh_bal -= depositInput;
+          break;
+
+        case "1524":
+          mh_bal -= depositInput;
+          break;
+      }
+    }
+    Back_btn();
   }
 
   function Back_btn() {
@@ -150,7 +193,11 @@
     <input type="number" id="depositInput" /><br /><br />
     <button class="home_btn" onclick="depositCal()">Deposit</button>`;
 
-  const back_btn = `<br />
-            <br />
+  const withdrawDiv = `<br/>
+    </br>
+    <input type="number" id="depositInput" /><br /><br />
+    <button class="home_btn" onclick="withdrawCal()">Withdraw</button>`;
+
+  const back_btn = `
             <button class="home_btn" onclick="Back_btn()">Back</button>`;
 </script>
