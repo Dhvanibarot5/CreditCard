@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- css -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="login" id="login">
+      <div id="Enter_card" class="inner">
+        <h1>ENTER YOU PIN</h1>
+        <input type="password" id="pin" /><br /><br />
+        <button class="btn" id="submit">Submit</button>
+      </div>
+      <div class="option">
+        <h5>USERS PIN</h5>
+        <p style="font-size: 14px" id="user1">Dhruti:-1234</p>
+        <p style="font-size: 14px" id="user3">Dhvani:-1224</p>
+        <p style="font-size: 14px" id="user2">Mayur:-1524</p>
+      </div>
+    </div>
+    <div id="home">
+      <div class="outer">
+        <h2 id="result1"></h2>
+        <div class="inner1" id="options">
+          <button class="home_btn" onclick="check_balance()">1.Check Balance</button>
+          <button class="home_btn" onclick="deposit()">2.Deposit</button>
+          <button class="home_btn" onclick="Withdraw()">3.Withdraw</button>
+          <button class="home_btn" onclick="Exit()">4.Exit</button>
+        </div>
+        <div class="inner1" id="user_page">
+          <div id="result2"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  let d_bal = 250000;
+  let dh_bal = 1500000;
+  let mh_bal = 200000;
+  let pin = "";
+
+  document.getElementById("submit").addEventListener("click", (e) => {
+    pin = document.getElementById("pin").value;
+
+    if (pin == "1234" || pin == "1224" || pin == "1524") {
+      document.getElementById("login").style.display = "none";
+      document.getElementById("home").style.display = "block";
+
+      user_info();
+    } else {
+      alert("Enter valid Pin..! ");
+    }
+  });
+
+  function user_info() {
+    switch (pin) {
+      case "1234":
+        document.getElementById("result1").innerHTML = "Welcome Ms. Dhruti";
+        break;
+
+      case "1224":
+        document.getElementById("result1").innerHTML = "Welcome Ms. Dhvani";
+        break;
+
+      case "1524":
+        document.getElementById("result1").innerHTML = "Welcome Mr. Mayur";
+    }
+  }
+
+  function check_balance() {
+    document.getElementById("result2").innerHTML = "";
+    document.getElementById("options").style.display = "none";
+    document.getElementById("user_page").style.display = "block";
+
+    switch (pin) {
+      case "1234":
+        document.getElementById("result2").innerHTML = "Your bank balance is Rs. " + d_bal + back_btn;
+        break;
+
+      case "1224":
+        document.getElementById("result2").innerHTML = "Your bank balance is Rs. " + dh_bal + back_btn;
+        break;
+
+      case "1524":
+        document.getElementById("result2").innerHTML = "Your bank balance is Rs. " + mh_bal + back_btn;
+        break;
+    }
+  }
+
+  function deposit() {
+    document.getElementById("result2").innerHTML = "";
+    document.getElementById("options").style.display = "none";
+    document.getElementById("user_page").style.display = "block";
+
+    switch (pin) {
+      case "1234":
+        document.getElementById("result2").innerHTML = "Your bank balance is Rs. " + d_bal + depositDiv + back_btn;
+        break;
+
+      case "1224":
+        document.getElementById("result2").innerHTML = "Your bank balance is Rs. " + dh_bal + depositDiv + back_btn;
+        break;
+
+      case "1524":
+        document.getElementById("result2").innerHTML = "Your bank balance is Rs. " + mh_bal + depositDiv + back_btn;
+        break;
+    }
+  }
+
+  function depositCal() {
+    const depositInput = parseInt(document.getElementById("depositInput").value);
+
+    switch (pin) {
+      case "1234":
+        d_bal += depositInput;
+        break;
+
+      case "1224":
+        dh_bal += depositInput;
+        break;
+
+      case "1524":
+        mh_bal += depositInput;
+        break;
+    }
+    Back_btn()
+  }
+
+  function Back_btn() {
+    document.getElementById("result2").innerHTML = "";
+    document.getElementById("options").style.display = "flex";
+    document.getElementById("user_page").style.display = "none";
+  }
+
+  function Exit() {
+    document.getElementById("login").style.display = "flex";
+    document.getElementById("pin").value = "";
+    document.getElementById("home").style.display = "none";
+  }
+</script>
+
+<script>
+  const depositDiv = `<br/>
+    </br>
+    <input type="number" id="depositInput" /><br /><br />
+    <button class="home_btn" onclick="depositCal()">Deposit</button>`;
+
+  const back_btn = `<br />
+            <br />
+            <button class="home_btn" onclick="Back_btn()">Back</button>`;
+</script>
